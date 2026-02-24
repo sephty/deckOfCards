@@ -238,7 +238,16 @@ btnRestart.addEventListener("click", function() {
     moneyDisplay.innerText = "Dinero: $" + playerMoney + " | Apuesta Actual: $0";
     
     if (playerMoney <= 0) {
-        messageDiv.innerText = "¡Te quedaste sin dinero! Recarga la página para recibir otros $1000.";
-        btnDeal.disabled = true;
+
+        moneyDisplay.innerText = "Te quedaste sin dinero! Recarga la página usando ctrl+F5 para recibir otros $1000.";
+    
+        const header = document.querySelector(".header");
+    
+        document.body.innerHTML = "";
+        document.body.appendChild(header);
+        document.body.style.display = "flex";
+        document.body.style.justifyContent = "center";
+        document.body.style.alignItems = "center";
+        document.body.style.height = "100vh";
     }
 });
