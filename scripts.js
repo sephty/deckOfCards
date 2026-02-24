@@ -18,6 +18,7 @@ const btnDeal = document.getElementById("btn-deal");
 const btnHit = document.getElementById("btn-hit");
 const btnStay = document.getElementById("btn-stay");
 const btnRestart = document.getElementById("btn-restart");
+const btnDoubleDown = document.getElementById("btn-doubledown");
 
 // ===== OBTENER UN NUEVO MAZO MEZCLADO DESDE LA API =====
 async function getNewDeck() {
@@ -131,6 +132,7 @@ btnDeal.addEventListener("click", async function() {
     betInput.disabled = true;
     btnHit.disabled = false;
     btnStay.disabled = false;
+    btnDoubleDown.disabled = false;
     btnRestart.disabled = true;
     messageDiv.innerText = "¡Buena suerte!";
 
@@ -214,6 +216,7 @@ function endGame(msg) {
 
     btnHit.disabled = true;
     btnStay.disabled = true;
+    btnDoubleDown.disabled = true;
     btnRestart.disabled = false;
 }
 
@@ -249,5 +252,58 @@ btnRestart.addEventListener("click", function() {
         document.body.style.justifyContent = "center";
         document.body.style.alignItems = "center";
         document.body.style.height = "100vh";
+    }
+});
+
+// ===== BOTÓN DOUBLE DOWN =====
+btnDoubleDown.addEventListener("click", async function() {
+
+    // Verificar si tiene suficiente dinero para duplicar
+    if (playerMoney < currentBet) {
+        messageDiv.innerText = "¡No tienes suficiente dinero para hacer double down!";
+        return;
+    }
+
+    // Duplicar la apuesta
+    playerMoney = playerMoney - currentBet;
+    currentBet = currentBet * 3;
+
+    // Deshabilitar botones
+    btnHit.disabled = true;
+    btnStay.disabled = true;
+    btnDoubleDown.disabled = true;
+
+    // Robar una carta
+    let cards = await drawCard(1);
+    playerHand.push(cards[0]);
+    
+    let pScore = calculateScore(playerHand);
+    updateUI(true);
+
+    // Verificar si se pasó
+    if (pScore > 21) {
+        endGame("¡Te pasaste! Superaste 21.");
+        return;
+    }
+
+    // Plantarse automáticamente - turno del crupier
+    let dScore = calculateScore(dealerHand);
+
+    while (dScore < 17) {
+        let dealerCards = await drawCard(1);
+        dealerHand.push(dealerCards[0]);
+        dScore = calculateScore(dealerHand);
+    }
+
+    updateUI(false);
+
+    if (dScore > 21) {
+        endGame("¡El crupier se pasó! ¡Ganaste!");
+    } else if (pScore > dScore) {
+        endGame("¡Venciste al crupier!");
+    } else if (dScore > pScore) {
+        endGame("El crupier gana.");
+    } else {
+        endGame("¡Empate!");
     }
 });
