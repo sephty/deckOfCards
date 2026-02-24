@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twenty-One Game</title>
+    <!-- Linking the CSS file here! -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="header">
+        <h1>Student Casino: Twenty-One</h1>
+        <h2 id="money-display">Money: $1000 | Current Bet: $0</h2>
+    </div>
+
+    <div class="game-container">
+        <div class="deck-pile">
+            <img src="https://deckofcardsapi.com/static/img/back.png" alt="Deck Pile">
+        </div>
+
+        <div class="center-board">
+            <div>
+                <h3>NPC Dealer Score: <span id="dealer-score-text">?</span></h3>
+                <div class="hand" id="dealer-hand"></div>
+            </div>
+
+            <div id="message">Place your bet and click Deal!</div>
+
+            <div class="controls">
+                <input type="number" id="bet-input" value="100" min="1">
+                <button id="btn-deal">Deal</button>
+                <button id="btn-hit" disabled>Hit (Up)</button>
+                <button id="btn-stay" disabled>Stay</button>
+
+                <button id="btn-restart" class="restart-btn" disabled>Restart</button>
+            </div>
+
+            <div>
+                <h3>Your Score: <span id="player-score-text">0</span></h3>
+                <div class="hand" id="player-hand"></div>
+            </div>
+        </div>
+        
+
+        <div style="flex: 1;"></div> 
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
