@@ -261,6 +261,7 @@ btnRestart.addEventListener("click", function() {
         document.body.innerHTML = "";
         document.body.appendChild(header);
         document.body.appendChild(controls);
+        header.style.transform = "translateX(0%)";
         document.body.style.display = "flex";
         document.body.style.justifyContent = "center";
         document.body.style.alignItems = "center";
