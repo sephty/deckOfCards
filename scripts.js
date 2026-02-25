@@ -242,12 +242,25 @@ btnRestart.addEventListener("click", function() {
     
     if (playerMoney <= 0) {
 
-        moneyDisplay.innerText = "Te quedaste sin dinero! Recarga la página usando ctrl+F5 para recibir otros $1000.";
-    
+        moneyDisplay.innerText = "Te quedaste sin dinero! Usa el botón para recargar la página y recibir otros $1000.";
+
         const header = document.querySelector(".header");
-    
+        const controls = document.querySelector(".controls");
+
+        const reloadBtn = document.createElement("button");
+        reloadBtn.id = "btn-reload";
+        reloadBtn.innerText = "Recargar página";
+        reloadBtn.style.padding = "8px";
+        reloadBtn.addEventListener("click", function() {
+            location.reload();
+        });
+
+        controls.innerHTML = "";
+        controls.appendChild(reloadBtn);
+
         document.body.innerHTML = "";
         document.body.appendChild(header);
+        document.body.appendChild(controls);
         document.body.style.display = "flex";
         document.body.style.justifyContent = "center";
         document.body.style.alignItems = "center";

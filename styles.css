@@ -13,17 +13,19 @@ body {
 
 .header {
     text-align: center;
-    margin-bottom: 20px;
+    margin: 0 auto 20px;
     background: rgba(0, 0, 0, 0.5);
     padding: 10px 30px;
     border-radius: 10px;
     border: 2px solid #000000;
+    max-width: 90%;
 }
 
 .game-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    gap: 30px;
     width: 100%;
     max-width: 900px;
 }
@@ -33,6 +35,7 @@ body {
     display: flex;
     justify-content: center;
     padding: 2px 10px;
+    transform: translateX(-18px);
 }
 
 .deck-pile img {
@@ -48,12 +51,15 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .hand {
     display: flex;
     gap: 10px;
     min-height: 150px;
+    padding: 10px;
 }
 
 .hand img {
